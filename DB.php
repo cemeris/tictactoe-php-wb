@@ -53,6 +53,28 @@ class DB
       }
   }
 
+  public function update($id, $values) {
+    $set_values = '';
+    $i = 0;
+    foreach ($values as $key => $value) {
+      $i = $i + 1;
+      $set_values = $set_values . $key . "=" . "'$value'";
+      if (count($values) > $i) {
+        $set_values = $set_values . ", ";
+      }
+    }
+
+    $sql = "UPDATE `$this->table` SET $set_values WHERE id=$id";
+    $result = $this->con->query($sql);
+  
+    if ($result === true) {
+      $this->last_message = "ieraksts izmainīts";
+    }
+    else {
+      $this->last_message = "neizdevās updates";
+    }
+  }
+
     public function set($entries) {
         $columns = '';
         $values = '';
