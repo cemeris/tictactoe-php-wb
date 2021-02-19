@@ -22,6 +22,36 @@ class DB
         $this->con->close();
     }
 
+    public function get() {
+      $sql = "SELECT id FROM `$this->table`";
+      $result = $this->con->query($sql);
+      
+      if ($result) {
+        if ($result->num_rows > 0) {
+          echo "<table><tr>
+          <th>ID</th>
+          <th>URL</th>
+          <th>Delete</th>
+          </tr>";
+
+          while($row = $result->fetch_assoc()):
+            ?>
+            <tr>
+              <td><?=$row['id']?></td>
+              <td><a href="?game-id=<?=$row['id']?>">Game</a></td>
+            </tr>
+           <?php
+            $this->last_message = json_encode($row) . "<br>";
+          endwhile;
+          echo "</table>";
+        } else {
+          $this->last_message = "0 results";
+        }
+      }
+      else {
+        $this->last_message = "Result is wrong";
+      }
+  }
 
     public function set($entries) {
         $columns = '';

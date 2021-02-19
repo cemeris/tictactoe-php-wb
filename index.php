@@ -27,4 +27,9 @@ error_reporting(E_ALL);
 
 <?php }else { ?>
     <a class="btn" href="startgame.php">start game</a>
-<?php } ?>
+
+    
+<?php
+    $game->get();
+} 
+?>
