@@ -11,16 +11,26 @@ error_reporting(E_ALL);
     $game = new DB('game');
 ?>
 
-<?php if(array_key_exists('game-id', $_REQUEST)) {
-    echo 'kolona: '. $_REQUEST['c'] . '; rinda:' . $_REQUEST['r'];
-    $id = $_REQUEST['game-id'];
+<?php if(array_key_exists('game-id', $_REQUEST) && (int) $_REQUEST['game-id'] > 0) {
+    $id = (int) $_REQUEST['game-id'];
+
+    if (array_key_exists('r', $_REQUEST) && array_key_exists('c', $_REQUEST)) {
+        $c = (int) $_REQUEST['c'];
+        $r = (int) $_REQUEST['r'];
+        echo $c . " r: " . $r;
+        if ($c >= 1 && $c <= 3 && $r >= 1 && $r <= 3) {
+            $game->update($id, ["c{$c}r{$r}" => '2']);
+        }
+    }
+
+    $board = $game->get($id);
     
     ?>
     <div class="container">
 
     <?php for ($r = 1; $r <= 3; $r++):?>
         <?php for ($c = 1; $c <= 3; $c++):?>
-            <a href="?c=<?=$c?>&r=<?=$r?>&game-id=<?=$id;?>">-</a>
+            <a href="?c=<?=$c?>&r=<?=$r?>&game-id=<?=$id;?>"><?=$board["c{$c}r{$r}"];?></a>
         <?php endfor; ?>
     <?php endfor; ?>
 
@@ -31,6 +41,6 @@ error_reporting(E_ALL);
 
     
 <?php
-    $game->get();
+    $game->getAll();
 } 
 ?>

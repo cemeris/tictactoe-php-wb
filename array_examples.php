@@ -6,8 +6,52 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 ?>
 
+<?php 
+    $entries = [
+        ['0', '0', '0'],
+        ['0', '0', '0'],
+        ['0', '0', '0']
+    ];
 
+    for ($r = 0; $r <= 2; $r++) {
+        for ($c = 0; $c <= 2; $c++) {
+            $entries[$r][$c] = 'x';
+        }
+    }
+    output($entries);
+?>
 
+<?php 
+    $entries = [
+        ['0', '0', '0'],
+        ['0', '0', '0'],
+        ['0', '0', '0']
+    ];
+
+    for ($r = 0; $r <= 2; $r = $r + 1) {
+        for ($c = 1; $c <= 2; $c = $c + 1) {
+            $entries[$r][$c] = 'x';
+        }
+    }
+    output($entries);
+?>
+
+<?php 
+    $entries = [
+        ['0', '0', '0'],
+        ['0', '0', '0'],
+        ['0', '0', '0']
+    ];
+
+    for ($r = 0; $r <= 2; $r = $r + 1) {
+        for ($c = 0; $c <= 2; $c = $c + 1) {
+            if ($c !== 1 || $r !== 1) {
+                $entries[$r][$c] = 'x';
+            }
+        }
+    }
+    output($entries);
+?>
 
 <?php function output($entries) { ?>
     <table>
@@ -19,6 +63,7 @@ error_reporting(E_ALL);
             </tr>
         <?php endfor;?>
     </table>
+    <hr>
 <?php } ?>
 
 <div style="width:100px; display:inline-block;">

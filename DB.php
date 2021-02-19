@@ -22,7 +22,7 @@ class DB
         $this->con->close();
     }
 
-    public function get() {
+    public function getAll() {
       $sql = "SELECT id FROM `$this->table`";
       $result = $this->con->query($sql);
       
@@ -52,6 +52,22 @@ class DB
         $this->last_message = "Result is wrong";
       }
   }
+
+  public function get($id) {
+    $sql = "SELECT * FROM `$this->table` WHERE id=$id";
+    $result = $this->con->query($sql);
+    
+    if ($result) {
+      if ($result->num_rows > 0) {
+        return $result->fetch_assoc();
+      } else {
+        $this->last_message = "0 results";
+      }
+    }
+    else {
+      $this->last_message = "Result is wrong";
+    }
+}
 
   public function update($id, $values) {
     $set_values = '';
