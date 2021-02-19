@@ -11,7 +11,8 @@ error_reporting(E_ALL);
     $game = new DB('game');
 ?>
 
-<?php if(array_key_exists('game-id', $_REQUEST)) { 
+<?php if(array_key_exists('game-id', $_REQUEST)) {
+    echo 'kolona: '. $_REQUEST['c'] . '; rinda:' . $_REQUEST['r'];
     $id = $_REQUEST['game-id'];
     
     ?>
