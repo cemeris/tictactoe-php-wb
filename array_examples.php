@@ -1,10 +1,14 @@
 <h1>Array examples</h1>
 
+<?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+?>
 
 
 
-<?php output($entries);?>
-<pre><?=print_r($entries, true)?></pre>
+
 <?php function output($entries) { ?>
     <table>
         <?php for($row = 0; $row < 3; $row++): ?>
