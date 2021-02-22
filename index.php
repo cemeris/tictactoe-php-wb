@@ -20,8 +20,8 @@ error_reporting(E_ALL);
         echo $c . " r: " . $r;
         if ($c >= 1 && $c <= 3 && $r >= 1 && $r <= 3) {
             $game->update($id, [
-                "c{$c}r{$r}" => '2',
-                "`next-to-move`" => '1'
+                "c{$c}r{$r}" => "IF(`next-to-move` = 0, 2, 1)",
+                "`next-to-move`" => "IF(`next-to-move` = 0, 1, 0)"
             ]);
         }
     }

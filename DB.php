@@ -3,7 +3,6 @@ class DB
 {
     private $con;
     private $table;
-
     
     public function __construct($table_name) {
         $this->table = $table_name;
@@ -69,12 +68,12 @@ class DB
     }
 }
 
-  public function update($id, $values) {
+public function update($id, $values) {
     $set_values = '';
     $i = 0;
     foreach ($values as $key => $value) {
       $i = $i + 1;
-      $set_values = $set_values . $key . "=" . "'$value'";
+      $set_values = $set_values . $key . "=" . "$value";
       if (count($values) > $i) {
         $set_values = $set_values . ", ";
       }
