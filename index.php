@@ -19,7 +19,10 @@ error_reporting(E_ALL);
         $r = (int) $_REQUEST['r'];
         echo $c . " r: " . $r;
         if ($c >= 1 && $c <= 3 && $r >= 1 && $r <= 3) {
-            $game->update($id, ["c{$c}r{$r}" => '2']);
+            $game->update($id, [
+                "c{$c}r{$r}" => '2',
+                "`next-to-move`" => '1'
+            ]);
         }
     }
 
@@ -28,11 +31,22 @@ error_reporting(E_ALL);
     ?>
     <div class="container">
 
-    <?php for ($r = 1; $r <= 3; $r++):?>
-        <?php for ($c = 1; $c <= 3; $c++):?>
-            <a href="?c=<?=$c?>&r=<?=$r?>&game-id=<?=$id;?>"><?=$board["c{$c}r{$r}"];?></a>
-        <?php endfor; ?>
-    <?php endfor; ?>
+    <?php
+        for ($r = 1; $r <= 3; $r++):
+            for ($c = 1; $c <= 3; $c++):
+                if ($board["c{$c}r{$r}"] == 2) {
+                    $value = "X";
+                }
+                else {
+                    $value = $board["c{$c}r{$r}"] == 1 ? "O" : "";
+                }
+            ?>
+            
+            <a href="?c=<?=$c?>&r=<?=$r?>&game-id=<?=$id;?>"><?=$value;?></a>
+    <?php
+            endfor;
+        endfor;
+    ?>
 
     </div>
 

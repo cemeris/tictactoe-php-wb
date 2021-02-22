@@ -88,6 +88,7 @@ class DB
     }
     else {
       $this->last_message = "neizdevās updates";
+      echo $this->con->error;
     }
   }
 
